@@ -2,7 +2,7 @@ import axios from "axios"
 
 import { useState, useEffect } from "react"
 
-function IndexPage() {
+export default () => {
   const [word, setWord] = useState("")
   const [pluralWord, setPluralWord] = useState("")
 
@@ -13,23 +13,18 @@ function IndexPage() {
         word
       })
 
-      console.log({ response })
-
       setPluralWord(response.data)
     })(word)
   }, [word])
 
   return (
-    <div>
-      {word}
+    <>
       <input
         type="text"
         value={word}
         onChange={event => setWord(event.target.value)}
       />
-      <h2>{pluralWord}</h2>
-    </div>
+      <div>{pluralWord}</div>
+    </>
   )
 }
-
-export default IndexPage
