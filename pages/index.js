@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 
 function IndexPage() {
   const [word, setWord] = useState("")
@@ -9,7 +9,7 @@ function IndexPage() {
   useEffect(() => {
     if (!word) return
     ;(async word => {
-      const response = await axios.post(`http://localhost:3000/api/plural`, {
+      const response = await axios.post(`/api/plural`, {
         word
       })
 
