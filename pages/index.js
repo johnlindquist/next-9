@@ -12,7 +12,7 @@ export default () => {
     if (!debouncedSentence) return
     ;(async () => {
       const response = await axios.post(`/api/parts`, {
-        sentence
+        sentence: debouncedSentence
       })
 
       console.log(response.data)
