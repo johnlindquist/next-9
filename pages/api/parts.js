@@ -11,9 +11,14 @@ const tagger = new natural.BrillPOSTagger(lexicon, rules)
 const tokenizer = new natural.WordTokenizer()
 
 export default function handle(req, res) {
-  const sentence = req.body.sentence.split(" ").flatMap(natural.normalize)
-  console.log(sentence)
-  const result = tagger.tag(sentence).taggedWords
+  const sentence = req.body.sentence
+    .split(" ")
+    .reduce((acc, word) => [...acc, ...natural.normalize(word)], [])
+    .join(" ") //flatmap
+
+  const tokens = tokenizer.tokenize(sentence)
+  console.log(tokens)
+  const result = tagger.tag(tokens).taggedWords
   console.log(result)
   res.json(result)
 }
